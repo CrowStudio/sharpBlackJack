@@ -69,6 +69,8 @@ namespace BlackJack
             // Deal cards for all players and the house
             dealer.DealHands(stakeholders);
             stakeholders[0].ShowDealersFirstCard();
+            //dealer.InitialScores(stakeholders, 0);
+
             for (int i = 1; i < stakeholders.Count; i++)
             {
                 stakeholders[i].ShowHand();
@@ -97,6 +99,10 @@ namespace BlackJack
                 {
                     Console.WriteLine(item + "\n");
                 } */
+            }   
+            if (dealer.Game)
+            {
+                dealer.Scores(stakeholders);
             }
         }
     }

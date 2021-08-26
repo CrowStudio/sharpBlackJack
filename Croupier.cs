@@ -51,43 +51,42 @@ namespace BlackJack
             string input;
             int sum;
 
-            if (index == 1 && FirstRound)
-            {
-                stakeholders[0].ShowDealersFirstCard();
-                stakeholders[index].ShowHand();
-            }
-
-            else if (index == 2 && FirstRound) stakeholders[index].ShowHand();
-
-            else
-            {
-                Console.Clear();
-                stakeholders[0].ShowDealersFirstCard();
-                for (int i = 1; i < index; i++) stakeholders[i].ShowHand();
-                stakeholders[index].ShowHand();
-            }
+            Console.Clear();
 
             Points[index] = sum = stakeholders[index].SumOfHand();
 
-            if (sum == 0) Deal = false;
-
-            else if (sum == 21)
-            {
-                Deal = false;
-                Game = false;
-            }
+            if (sum == 0 || sum == 21) Deal = false;
 
             else
             {
+                if (index == 1 && FirstRound)
+                {
+                    stakeholders[0].ShowDealersFirstCard();
+                    stakeholders[index].ShowHand();
+                }
+
+                else if (index == 2 && FirstRound)
+                {
+                    stakeholders[0].ShowDealersFirstCard();
+                    stakeholders[1].ShowHand();
+                    stakeholders[index].ShowHand();
+                }
+
+                else
+                {
+                    stakeholders[0].ShowDealersFirstCard();
+                    for (int i = 1; i < index; i++) stakeholders[i].ShowHand();
+                    stakeholders[index].ShowHand();
+                }
+
                 Console.Write(stakeholders[index].Name + " - (H)it or (S)tand? ");
                 input = Console.ReadLine().ToUpper();
 
                 if (input != "H" && input != "S")
                 {
-                    if (index == 1 && FirstRound || index == 2 && FirstRound) Console.Clear();
-
-                    Console.Clear();
                     Console.WriteLine("Incorrect input, must be h or s - try again!");
+                    System.Threading.Thread.Sleep(1000);
+                    Console.Clear();
                 }
 
                 else
@@ -113,16 +112,8 @@ namespace BlackJack
 
                     else if (input == "S")
                     {
-                        if (index == 1 && FirstRound)
-                        {
-                            Console.Clear();
-                            stakeholders[0].ShowDealersFirstCard();
-                            stakeholders[1].ShowHand();
-                        }
-
                         Points[index] = sum = stakeholders[index].SumOfHand();
 
-                        //Console.WriteLine("No more cards for " + stakeholders[index].Name + "\n");
                         Deal = false;
                     }
                 }
@@ -161,6 +152,7 @@ namespace BlackJack
         public void Scores(List<Player> stakeholders)
         {
             int houseWin = 0;
+
             for (int i = 1; i < stakeholders.Count; i++)
             {
                 if (Points[i] > Points[0])
@@ -186,11 +178,9 @@ namespace BlackJack
             {
                 if (Points[i] == 3) Console.WriteLine("\n" + stakeholders[i].Name + " - Congratulations you WIN!");
 
-                else if (Points[i] == 2) Console.WriteLine("\n" + stakeholders[i].Name + " - No one wins, it's a PUSH!");
+                else if (Points[i] == 2 && Points[0] != 0) Console.WriteLine("\n" + stakeholders[i].Name + " - No one wins, it's a PUSH!");
 
-                else if (Points[i] == 1) Console.WriteLine("\n" + stakeholders[i].Name + " - You LOST!");
-
-
+                else if (Points[i] == 1 && houseWin > 0) Console.WriteLine("\n" + stakeholders[i].Name + " - You LOST!");
             }
         }
 
