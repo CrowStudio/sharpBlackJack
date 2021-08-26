@@ -7,8 +7,8 @@ namespace BlackJack
     class Croupier
     {
         private bool deal, game, firstRound;
+        private int[] points = new int[5];
         private DeckOfCards dealersDeck;
-        List<Player> stakeholders;
 
         public Croupier()
         {
@@ -49,6 +49,7 @@ namespace BlackJack
         private void HitOrStand(List<Player> stakeholders, int index)
         {
             string input;
+            int sum;
 
             if (index == 1 && FirstRound)
             {
@@ -66,9 +67,11 @@ namespace BlackJack
                 stakeholders[index].ShowHand();
             }
 
-            if (stakeholders[index].SumOfHand() == 0) Deal = false;
+            Points[index] = sum = stakeholders[index].SumOfHand();
 
-            else if (stakeholders[index].SumOfHand() == 21)
+            if (sum == 0) Deal = false;
+
+            else if (sum == 21)
             {
                 Deal = false;
                 Game = false;
@@ -91,7 +94,9 @@ namespace BlackJack
                 {
                     if (input == "H")
                     {
-                        if (stakeholders[index].SumOfHand() == 0) Deal = false;
+                        Points[index] = sum = stakeholders[index].SumOfHand();
+
+                        if (sum == 0) Deal = false;
 
                         if (Deal)
                         {
@@ -122,13 +127,17 @@ namespace BlackJack
 
         public void NewCardDealer(List<Player> stakeholders)
         {
+            int sum;
+
             if (Game)
             {
                 Console.Clear();
                 stakeholders[0].ShowHand();
                 for (int i = 1; i < stakeholders.Count; i++) stakeholders[i].ShowHand();
 
-                while (stakeholders[0].SumOfHand() <= 17 && stakeholders[0].SumOfHand() != 0)
+                Points[0] = sum = stakeholders[0].SumOfHand();
+
+                while (sum <= 17 && sum != 0)
                 {
                     Console.WriteLine("Hit enter to see The House's next card\n");
                     Console.ReadKey();
@@ -144,6 +153,7 @@ namespace BlackJack
         public bool Deal { get => deal; set => deal = value; }
         public bool Game { get => game; set => game = value; }
         public bool FirstRound { get => firstRound; set => firstRound = value; }
+        public int[] Points { get => points; set => points = value; }
     }
 }
 

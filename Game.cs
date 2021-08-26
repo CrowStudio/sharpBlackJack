@@ -6,7 +6,7 @@ namespace BlackJack
 {
     class Game
     {
-        List<Player> stakeholders = new List<Player>();
+        private List<Player> stakeholders = new List<Player>();
         Croupier dealer = new Croupier();
 
         public Game()
@@ -98,8 +98,6 @@ namespace BlackJack
                     Console.WriteLine(item + "\n");
                 } */
             }
-
-
         }
     }
 }
