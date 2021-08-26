@@ -1,2 +1,2 @@
 # sharpBlackJack
-Black Jack game written in C#
+A simplified Black Jack game written in C#
