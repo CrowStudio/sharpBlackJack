@@ -32,9 +32,9 @@ namespace BlackJack
 
             if (value == 21 && player.Name != "The House") Console.WriteLine("\n" + player.Name + " - Congratulations you got BLACK JACK!\n");
 
-            else if (value == 0 && player.Name == "The House") Console.WriteLine("\nThe House is BUST!\n");
+            else if (value == 0 && player.Name != "The House") Console.WriteLine("\n" + player.Name + " - You are BUST!\n");
 
-            else if (value == 0) Console.WriteLine("\n" + player.Name + " - You are BUST!\n");
+            else if (value == 0 && player.Name == "The House") Console.WriteLine("\nThe House is BUST!\n");
 
             else Console.WriteLine("\n");
         }

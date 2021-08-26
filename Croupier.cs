@@ -106,6 +106,8 @@ namespace BlackJack
                             if (index == 1 && FirstRound) Console.Clear();
 
                             else if (index == 2 && FirstRound) FirstRound = false;
+
+                            Points[index] = sum = stakeholders[index].SumOfHand();
                         }
                     }
 
@@ -117,6 +119,8 @@ namespace BlackJack
                             stakeholders[0].ShowDealersFirstCard();
                             stakeholders[1].ShowHand();
                         }
+
+                        Points[index] = sum = stakeholders[index].SumOfHand();
 
                         //Console.WriteLine("No more cards for " + stakeholders[index].Name + "\n");
                         Deal = false;
@@ -141,12 +145,52 @@ namespace BlackJack
                 {
                     Console.WriteLine("Hit enter to see The House's next card\n");
                     Console.ReadKey();
+
                     stakeholders[0].AddCard(dealersDeck.ShuffledDeck[0]);
                     dealersDeck.ShuffledDeck.RemoveAt(0);
+
                     Console.Clear();
                     stakeholders[0].ShowHand();
                     for (int i = 1; i < stakeholders.Count; i++) stakeholders[i].ShowHand();
+
+                    Points[0] = sum = stakeholders[0].SumOfHand();
                 }
+            }
+        }
+
+        public void Scores(List<Player> stakeholders)
+        {
+            int houseWin = 0;
+            for (int i = 1; i < stakeholders.Count; i++)
+            {
+                if (Points[i] > Points[0])
+                {
+                    Points[i] = 3;
+                    houseWin = 0;
+                }
+
+                else if (Points[i] == Points[0])
+                {
+                    Points[i] = 2;
+                    houseWin = 0;
+                }
+
+                else if (Points[i] != 0 && Points[i] < Points[0])
+                {
+                    Points[i] = 1;
+                    houseWin++;
+                }
+            }
+
+            for (int i = 1; i < stakeholders.Count; i++)
+            {
+                if (Points[i] == 3) Console.WriteLine("\n" + stakeholders[i].Name + " - Congratulations you WIN!");
+
+                else if (Points[i] == 2) Console.WriteLine("\n" + stakeholders[i].Name + " - No one wins, it's a PUSH!");
+
+                else if (Points[i] == 1) Console.WriteLine("\n" + stakeholders[i].Name + " - You LOST!");
+
+
             }
         }
 
