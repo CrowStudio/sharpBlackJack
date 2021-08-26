@@ -51,14 +51,14 @@ namespace BlackJack
             string input;
             int sum;
 
-            Console.Clear();
-
             points[index] = sum = stakeholders[index].SumOfHand();
 
             if (sum == 0 || sum == 21) Deal = false;
 
             else
             {
+                Console.Clear();
+
                 if (index == 1 && firstTurn)
                 {
                     stakeholders[0].ShowDealersFirstCard();
