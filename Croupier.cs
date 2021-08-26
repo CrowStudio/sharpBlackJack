@@ -33,7 +33,7 @@ namespace BlackJack
         {
             for (int i = 1; i < stakeholders.Count; i++)
             {
-                Deal = true;
+                deal = true;
                 firstTurn = true;
 
                 if (stakeholders[i].SumOfHand() == 21)
@@ -42,7 +42,7 @@ namespace BlackJack
                     break;
                 }
 
-                while (Game && Deal) HitOrStand(stakeholders, i);
+                while (Game && deal) HitOrStand(stakeholders, i);
             }
         }
 
@@ -53,7 +53,7 @@ namespace BlackJack
 
             points[index] = sum = stakeholders[index].SumOfHand();
 
-            if (sum == 0 || sum == 21) Deal = false;
+            if (sum == 0 || sum == 21) deal = false;
 
             else
             {
@@ -95,9 +95,9 @@ namespace BlackJack
                     {
                         points[index] = sum = stakeholders[index].SumOfHand();
 
-                        if (sum == 0) Deal = false;
+                        if (sum == 0) deal = false;
 
-                        if (Deal)
+                        if (deal)
                         {
                             stakeholders[index].AddCard(dealersDeck.ShuffledDeck[0]);
                             dealersDeck.ShuffledDeck.RemoveAt(0);
@@ -114,7 +114,7 @@ namespace BlackJack
                     {
                         points[index] = sum = stakeholders[index].SumOfHand();
 
-                        Deal = false;
+                        deal = false;
                     }
                 }
             }
@@ -184,7 +184,6 @@ namespace BlackJack
             }
         }
 
-        public bool Deal { get => deal; set => deal = value; }
         public bool Game { get => game; set => game = value; }
     }
 }
