@@ -6,7 +6,7 @@ namespace BlackJack
 {
     class Croupier
     {
-        private bool deal, game, firstRound;
+        private bool deal, game, firstTurn;
         private int[] points = new int[5];
         private DeckOfCards dealersDeck;
 
@@ -34,7 +34,7 @@ namespace BlackJack
             for (int i = 1; i < stakeholders.Count; i++)
             {
                 Deal = true;
-                FirstRound = true;
+                firstTurn = true;
 
                 if (stakeholders[i].SumOfHand() == 21)
                 {
@@ -59,13 +59,13 @@ namespace BlackJack
 
             else
             {
-                if (index == 1 && FirstRound)
+                if (index == 1 && firstTurn)
                 {
                     stakeholders[0].ShowDealersFirstCard();
                     stakeholders[index].ShowHand();
                 }
 
-                else if (index == 2 && FirstRound)
+                else if (index == 2 && firstTurn)
                 {
                     stakeholders[0].ShowDealersFirstCard();
                     stakeholders[1].ShowHand();
@@ -102,9 +102,9 @@ namespace BlackJack
                             stakeholders[index].AddCard(dealersDeck.ShuffledDeck[0]);
                             dealersDeck.ShuffledDeck.RemoveAt(0);
 
-                            if (index == 1 && FirstRound) Console.Clear();
+                            if (index == 1 && firstTurn) Console.Clear();
 
-                            else if (index == 2 && FirstRound) FirstRound = false;
+                            else if (index == 2 && firstTurn) firstTurn = false;
 
                             points[index] = sum = stakeholders[index].SumOfHand();
                         }
@@ -186,7 +186,6 @@ namespace BlackJack
 
         public bool Deal { get => deal; set => deal = value; }
         public bool Game { get => game; set => game = value; }
-        public bool FirstRound { get => firstRound; set => firstRound = value; }
     }
 }
 
