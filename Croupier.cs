@@ -53,7 +53,7 @@ namespace BlackJack
 
             Console.Clear();
 
-            Points[index] = sum = stakeholders[index].SumOfHand();
+            points[index] = sum = stakeholders[index].SumOfHand();
 
             if (sum == 0 || sum == 21) Deal = false;
 
@@ -93,7 +93,7 @@ namespace BlackJack
                 {
                     if (input == "H")
                     {
-                        Points[index] = sum = stakeholders[index].SumOfHand();
+                        points[index] = sum = stakeholders[index].SumOfHand();
 
                         if (sum == 0) Deal = false;
 
@@ -106,13 +106,13 @@ namespace BlackJack
 
                             else if (index == 2 && FirstRound) FirstRound = false;
 
-                            Points[index] = sum = stakeholders[index].SumOfHand();
+                            points[index] = sum = stakeholders[index].SumOfHand();
                         }
                     }
 
                     else if (input == "S")
                     {
-                        Points[index] = sum = stakeholders[index].SumOfHand();
+                        points[index] = sum = stakeholders[index].SumOfHand();
 
                         Deal = false;
                     }
@@ -130,7 +130,7 @@ namespace BlackJack
                 stakeholders[0].ShowHand();
                 for (int i = 1; i < stakeholders.Count; i++) stakeholders[i].ShowHand();
 
-                Points[0] = sum = stakeholders[0].SumOfHand();
+                points[0] = sum = stakeholders[0].SumOfHand();
 
                 while (sum <= 17 && sum != 0)
                 {
@@ -144,7 +144,7 @@ namespace BlackJack
                     stakeholders[0].ShowHand();
                     for (int i = 1; i < stakeholders.Count; i++) stakeholders[i].ShowHand();
 
-                    Points[0] = sum = stakeholders[0].SumOfHand();
+                    points[0] = sum = stakeholders[0].SumOfHand();
                 }
             }
         }
@@ -155,39 +155,38 @@ namespace BlackJack
 
             for (int i = 1; i < stakeholders.Count; i++)
             {
-                if (Points[i] > Points[0])
+                if (points[i] > points[0])
                 {
-                    Points[i] = 3;
+                    points[i] = 3;
                     houseWin = 0;
                 }
 
-                else if (Points[i] == Points[0])
+                else if (points[i] == points[0])
                 {
-                    Points[i] = 2;
+                    points[i] = 2;
                     houseWin = 0;
                 }
 
-                else if (Points[i] != 0 && Points[i] < Points[0])
+                else if (points[i] != 0 && points[i] < points[0])
                 {
-                    Points[i] = 1;
+                    points[i] = 1;
                     houseWin++;
                 }
             }
 
             for (int i = 1; i < stakeholders.Count; i++)
             {
-                if (Points[i] == 3) Console.WriteLine("\n" + stakeholders[i].Name + " - Congratulations you WIN!");
+                if (points[i] == 3) Console.WriteLine("\n" + stakeholders[i].Name + " - Congratulations you WIN!");
 
-                else if (Points[i] == 2 && Points[0] != 0) Console.WriteLine("\n" + stakeholders[i].Name + " - No one wins, it's a PUSH!");
+                else if (points[i] == 2 && points[0] != 0) Console.WriteLine("\n" + stakeholders[i].Name + " - No one wins, it's a PUSH!");
 
-                else if (Points[i] == 1 && houseWin > 0) Console.WriteLine("\n" + stakeholders[i].Name + " - You LOST!");
+                else if (points[i] == 1 && houseWin > 0) Console.WriteLine("\n" + stakeholders[i].Name + " - You LOST!");
             }
         }
 
         public bool Deal { get => deal; set => deal = value; }
         public bool Game { get => game; set => game = value; }
         public bool FirstRound { get => firstRound; set => firstRound = value; }
-        public int[] Points { get => points; set => points = value; }
     }
 }
 
