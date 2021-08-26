@@ -12,13 +12,13 @@ namespace BlackJack
 
         public HandOfCards(string name, Player pl)
         {
-            HandBelongsTo = name;
+            handBelongsTo = name;
             player = pl;
         }
 
         public void ShowDealersFirstCard()
         {
-            Console.WriteLine(HandBelongsTo + "'s hand:");
+            Console.WriteLine(handBelongsTo + "'s hand:");
             Console.WriteLine(hand[0] + " *\n");
         }
 
@@ -73,6 +73,5 @@ namespace BlackJack
         }
 
         public List<string> Hand { get => hand; set => hand = value; }
-        public string HandBelongsTo { get => handBelongsTo; set => handBelongsTo = value; }
     }
 }
