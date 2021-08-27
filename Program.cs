@@ -30,11 +30,7 @@
  *      - If the House gets more than 21, the House gets Bust.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace BlackJack
+namespace sharpBlackJack
 {
     class Program
     {
@@ -42,11 +38,11 @@ namespace BlackJack
         {
             Game blackJack = new Game();
 
-            while (blackJack.AnotherRound)
+            while (blackJack.NewRound)
             {
                 blackJack.JoinGame();
 
-                if (blackJack.AnotherRound)
+                if (blackJack.NewRound)
                 {
                     blackJack.StartDeal();
                     blackJack.Play();

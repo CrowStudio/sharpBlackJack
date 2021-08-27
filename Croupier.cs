@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
-namespace BlackJack
+namespace sharpBlackJack
 {
     class Croupier
     {
@@ -85,7 +86,7 @@ namespace BlackJack
                 if (input != "H" && input != "S")
                 {
                     Console.WriteLine("Incorrect input, must be h or s - try again!");
-                    System.Threading.Thread.Sleep(1000);
+                    Thread.Sleep(1000);
                     Console.Clear();
                 }
 
