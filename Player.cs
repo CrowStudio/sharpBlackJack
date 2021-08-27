@@ -13,7 +13,7 @@ namespace sharpBlackJack
         public Player(string name)
         {
             Name = name;
-            // Create the a new HandOfCards object and give this inistance of Player as an argument
+            // Create the a new HandOfCards object and give This instance of Player as an argument
             MyHand = new HandOfCards(this);
         }
 

@@ -28,8 +28,8 @@ namespace sharpBlackJack
 
             else Console.WriteLine("Welcome to another round of Black Jack");
 
-            // Add up to 5 Players at the table, fill up or answer no to start game
-            // - Quit by answering NO when table is empty
+            // Add up to 5 Players at the table, after first Player joined fill up or answer No to start game
+            // - quit by answering No when table is empty
             while (NewRound && join && addPlayer > Stakeholders.Count - 1)
             {
                 if (Stakeholders.Count == 1) Console.WriteLine("Seats are open!\n");
@@ -74,13 +74,14 @@ namespace sharpBlackJack
                 Console.Clear();
             }
 
-            /* Comment code above, and use code below for testing, so you don't have to add Players manually
+            /* Comment all code above in this method, and use code below for testing, so you don't have to add Players manually
             Stakeholders.Add(new Player("Kalle"));
             Stakeholders.Add(new Player("Lisa"));
             Stakeholders.Add(new Player("Johan"));
-            Stakeholders.Add(new Player("Pia")); */
+            Stakeholders.Add(new Player("Pia")); 
+            Stakeholders.Add(new Player("Mikael")); */
 
-            // If no Players added quit game
+            // If no Players added - quit game
             if (Stakeholders.Count == 1) NewRound = false;
         }
 
@@ -135,7 +136,7 @@ namespace sharpBlackJack
             string stay = "";
             int who = 1;
 
-            // As long as it is not only The House left
+            // As long as it is NOT only The House left
             if (Stakeholders.Count != 1)
             {
                 // Add a new and freshly shuffled deck of cards for another round
@@ -151,7 +152,7 @@ namespace sharpBlackJack
                 stay = Console.ReadLine().ToUpper();
             }
 
-            // As long as there is Players at the table (The House does not count)
+            // As long as there is Players at the table - The House does not count as a Player
             while (Stakeholders.Count != 1)
             {
                 if (stay == "N")
@@ -165,7 +166,7 @@ namespace sharpBlackJack
                         stay = Console.ReadLine().ToUpper();
                     }
 
-                    // If there is NO Players left, stop asking
+                    // If there is NO Players left - stop asking
                     else break;
                 }
 
@@ -183,7 +184,7 @@ namespace sharpBlackJack
                         stay = Console.ReadLine().ToUpper();
                     }
 
-                    // If there is NO Players left, stop asking
+                    // If there is NO Players left - stop asking
                     else break;
                 }
 

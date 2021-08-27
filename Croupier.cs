@@ -30,7 +30,7 @@ namespace sharpBlackJack
             {
                 foreach (var stakholder in stakeholders)
                 {
-                    // Add a card to each respective hand from the top of the ShuffledDeck
+                    // Add a card to the respective hand from the top of the ShuffledDeck
                     stakholder.AddCard(DealersDeck.ShuffledDeck[0]);
                     // Remove the top card of ShuffledDeck
                     DealersDeck.ShuffledDeck.RemoveAt(0);
@@ -46,7 +46,7 @@ namespace sharpBlackJack
                 // Initiate deal 
                 deal = true;
 
-                // As long as Player wants a card or NOT Bust
+                // As long as Player wants a card, or NOT Bust
                 while (deal) HitOrStand(stakeholders, i);
             }
         }
@@ -59,7 +59,7 @@ namespace sharpBlackJack
             // Sum the Players hand and keep track of the score
             Points[index] = sum = stakeholders[index].SumOfHand();
 
-            // If Player is Bust or got Black Jack the deal is off
+            // If Player is Bust, or got Black Jack - the deal is off
             if (sum == 0 || sum == 21) deal = false;
 
             else
@@ -121,7 +121,7 @@ namespace sharpBlackJack
                                 else allBusted = stakeholders.Count - 1;
                             }
 
-                            // All Players are Bust
+                            // All Players are Bust - end game
                             if (allBusted == 0)
                             {
                                 deal = false;
@@ -199,14 +199,14 @@ namespace sharpBlackJack
                     houseWin = 0;
                 }
 
-                // Player and The House have a draw (Push)
+                // Player and The House have a draw (Push), NO ONE wins
                 else if (Points[i] == Points[0])
                 {
                     Points[i] = 2;
                     houseWin = 0;
                 }
 
-                // Player Lost
+                // Player Lose
                 else if (Points[i] != 0 && Points[i] < Points[0])
                 {
                     Points[i] = 1;
@@ -214,7 +214,7 @@ namespace sharpBlackJack
                 }
             }
 
-            // Tell the Player its outcome
+            // Tell the Players their outcome
             for (int i = 1; i < stakeholders.Count; i++)
             {
                 if (Points[i] == 3) Console.WriteLine("\n" + stakeholders[i].Name + " - Congratulations you WIN!");

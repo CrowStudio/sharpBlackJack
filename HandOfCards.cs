@@ -52,7 +52,7 @@ namespace sharpBlackJack
                     sumOfCards = sumOfCards + 11;
                     aces++;
 
-                    // If more than one Ace, Ace counts as 1
+                    // If more than one "A"ce, "A"ce counts as 1
                     if (sumOfCards > 21 && aces > 1)
                     {
                         if (aces == 2) sumOfCards = sumOfCards - 10;
@@ -71,7 +71,7 @@ namespace sharpBlackJack
                 else sumOfCards = sumOfCards + (int)Char.GetNumericValue(card[1]);
             }
 
-            // If Player has more than 21 sumOfCards = 0 to signal Player is Bust
+            // If Player's sumOfCards is more than 21 - sumOfCards = 0 to signal Player is Bust
             if (sumOfCards > 21) return 0;
 
             else return sumOfCards;
