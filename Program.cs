@@ -16,7 +16,7 @@
  * J, Q, K = 10
  * E = 11, if sum is more than 21 and more than one ace is present, the new ace counts as 1.
  * The House starts with one card open and one faced down.
- * Every Player gets two cards open, if no one got 21 the game continues.
+ * Every Player gets two cards open, if no one got 21 (Natural) the game continues.
  * Starting with the first Player who joined, the Player gets the question if they want to Hit or Stand.
  *  - If the Player choose to Hit they gets a new card.
  *  - If a Player gets more than 21 the Player gets Bust.
@@ -36,6 +36,7 @@ namespace sharpBlackJack
     {
         static void Main(string[] args)
         {
+            // Create a new Game object with an initial Player object as The House
             Game blackJack = new Game();
 
             while (blackJack.NewRound)

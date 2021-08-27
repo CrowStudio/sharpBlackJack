@@ -9,10 +9,12 @@ namespace sharpBlackJack
         private string name;
         private HandOfCards myHand;
 
+        // Create a new Croupier object with its own HandOfCards object 
         public Player(string name)
         {
             Name = name;
-            MyHand = new HandOfCards(Name, this);
+            // Create the a new HandOfCards object and give this inistance of Player as an argument
+            MyHand = new HandOfCards(this);
         }
 
         public void ShowDealersFirstCard()
@@ -34,6 +36,7 @@ namespace sharpBlackJack
 
         public void AddCard(string card)
         {
+            // Add new Card to Hand
             MyHand.Hand.Add(card);
         }
 

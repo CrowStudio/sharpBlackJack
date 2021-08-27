@@ -8,12 +8,12 @@ namespace sharpBlackJack
     {
         private bool newRound;
         private List<Player> stakeholders = new List<Player>();
+        // Create a new Croupier object with its own DeckOfHand object 
         Croupier dealer = new Croupier();
 
         public Game()
         {
             // Create a new Player object with its own HandOfCards object
-            // This will take care of The Houses/dealers hand
             Stakeholders.Add(new Player("The House"));
             NewRound = true;
         }
@@ -24,15 +24,23 @@ namespace sharpBlackJack
             bool join = true;
             string name, yn;
 
-            Console.WriteLine("Welcome to this table of Black Jack");
+            if (Stakeholders.Count == 1) Console.WriteLine("Welcome to this table of Black Jack");
+
+            else Console.WriteLine("Welcome to another round of Black Jack");
 
             // Add up to 5 Players at the table, fill up or answer no to start game
             // - Quit by answering NO when table is empty
             while (NewRound && join && addPlayer > Stakeholders.Count - 1)
             {
-                Console.Clear();
-                if (Stakeholders.Count == 1) Console.WriteLine("The table is empty!\n");
-                
+                if (Stakeholders.Count == 1) Console.WriteLine("Seats are open!\n");
+
+                // If more than two Players left to add - use " more Players"
+                else if ((Stakeholders.Count < 5))
+                {
+                    Console.WriteLine("There is room for " + (addPlayer - Stakeholders.Count + 1) + " more Players\n");
+                }
+
+                // If only one Player left to add - use " more Player"
                 else Console.WriteLine("There is room for " + (addPlayer - Stakeholders.Count + 1) + " more Player\n");
 
                 Console.WriteLine("Anyone who wants to join (Y/N)? ");
@@ -83,9 +91,11 @@ namespace sharpBlackJack
 
             // Only show The Houses first card, and show all Players cards
             Stakeholders[0].ShowDealersFirstCard();
+
             for (int i = 1; i < Stakeholders.Count; i++)
             {
                 Stakeholders[i].ShowHand();
+
                 // If PLayer get a Natural - 21 with two first cards - game is over
                 if (Stakeholders[i].SumOfHand() == 21)
                 {
@@ -117,10 +127,7 @@ namespace sharpBlackJack
             }   
 
             // Check if the game still is live, if it is victories and draws are determined
-            if (Dealer.Game)
-            {
-                Dealer.Scores(Stakeholders);
-            }
+            if (Dealer.Game) Dealer.Scores(Stakeholders);
         }
 
         public void PlayAgain()
