@@ -11,7 +11,7 @@
  *           |
  *           HandOfCards
  * 
- * Black Jack rules - 1-4 players
+ * Black Jack rules - 1-5 players
  * 2-10 = 2-10
  * J, Q, K = 10
  * E = 11, if sum is more than 21 and more than one ace is present, the new ace counts as 1.
@@ -42,10 +42,18 @@ namespace BlackJack
         {
             Game blackJack = new Game();
 
-            blackJack.JoinGame();
-            blackJack.StartDeal();
-            blackJack.Play();
+            while (blackJack.AnotherRound)
+            {
+                blackJack.JoinGame();
 
+                if (blackJack.AnotherRound)
+                {
+                    blackJack.StartDeal();
+                    blackJack.Play();
+                }
+
+                blackJack.PlayAgain();
+            }
         }
     }
 }

@@ -7,24 +7,24 @@ namespace BlackJack
     class Croupier
     {
         private bool deal, game, firstTurn;
-        private int[] points = new int[5];
+        private List<int> points = new List<int>() {0, 0, 0, 0, 0, 0};
         private DeckOfCards dealersDeck;
 
         public Croupier()
         {
-            dealersDeck = new DeckOfCards();
+            DealersDeck = new DeckOfCards();
         }
 
         public void DealHands(List<Player> stakeholders)
         {
             Game = true;
 
-            while (dealersDeck.ShuffledDeck.Count > 52 - (stakeholders.Count() * 2))
+            while (DealersDeck.ShuffledDeck.Count > 52 - (stakeholders.Count() * 2))
             {
                 foreach (var stakholder in stakeholders)
                 {
-                    stakholder.AddCard(dealersDeck.ShuffledDeck[0]);
-                    dealersDeck.ShuffledDeck.RemoveAt(0);
+                    stakholder.AddCard(DealersDeck.ShuffledDeck[0]);
+                    DealersDeck.ShuffledDeck.RemoveAt(0);
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace BlackJack
             string input;
             int sum;
 
-            points[index] = sum = stakeholders[index].SumOfHand();
+            Points[index] = sum = stakeholders[index].SumOfHand();
 
             if (sum == 0 || sum == 21) deal = false;
 
@@ -93,26 +93,26 @@ namespace BlackJack
                 {
                     if (input == "H")
                     {
-                        points[index] = sum = stakeholders[index].SumOfHand();
+                        Points[index] = sum = stakeholders[index].SumOfHand();
 
                         if (sum == 0) deal = false;
 
                         if (deal)
                         {
-                            stakeholders[index].AddCard(dealersDeck.ShuffledDeck[0]);
-                            dealersDeck.ShuffledDeck.RemoveAt(0);
+                            stakeholders[index].AddCard(DealersDeck.ShuffledDeck[0]);
+                            DealersDeck.ShuffledDeck.RemoveAt(0);
 
                             if (index == 1 && firstTurn) Console.Clear();
 
                             else if (index == 2 && firstTurn) firstTurn = false;
 
-                            points[index] = sum = stakeholders[index].SumOfHand();
+                            Points[index] = sum = stakeholders[index].SumOfHand();
                         }
                     }
 
                     else if (input == "S")
                     {
-                        points[index] = sum = stakeholders[index].SumOfHand();
+                        Points[index] = sum = stakeholders[index].SumOfHand();
 
                         deal = false;
                     }
@@ -130,21 +130,21 @@ namespace BlackJack
                 stakeholders[0].ShowHand();
                 for (int i = 1; i < stakeholders.Count; i++) stakeholders[i].ShowHand();
 
-                points[0] = sum = stakeholders[0].SumOfHand();
+                Points[0] = sum = stakeholders[0].SumOfHand();
 
                 while (sum <= 17 && sum != 0)
                 {
                     Console.WriteLine("Hit enter to see The House's next card\n");
                     Console.ReadKey();
 
-                    stakeholders[0].AddCard(dealersDeck.ShuffledDeck[0]);
-                    dealersDeck.ShuffledDeck.RemoveAt(0);
+                    stakeholders[0].AddCard(DealersDeck.ShuffledDeck[0]);
+                    DealersDeck.ShuffledDeck.RemoveAt(0);
 
                     Console.Clear();
                     stakeholders[0].ShowHand();
                     for (int i = 1; i < stakeholders.Count; i++) stakeholders[i].ShowHand();
 
-                    points[0] = sum = stakeholders[0].SumOfHand();
+                    Points[0] = sum = stakeholders[0].SumOfHand();
                 }
             }
         }
@@ -155,36 +155,38 @@ namespace BlackJack
 
             for (int i = 1; i < stakeholders.Count; i++)
             {
-                if (points[i] > points[0])
+                if (Points[i] > Points[0])
                 {
-                    points[i] = 3;
+                    Points[i] = 3;
                     houseWin = 0;
                 }
 
-                else if (points[i] == points[0])
+                else if (Points[i] == Points[0])
                 {
-                    points[i] = 2;
+                    Points[i] = 2;
                     houseWin = 0;
                 }
 
-                else if (points[i] != 0 && points[i] < points[0])
+                else if (Points[i] != 0 && Points[i] < Points[0])
                 {
-                    points[i] = 1;
+                    Points[i] = 1;
                     houseWin++;
                 }
             }
 
             for (int i = 1; i < stakeholders.Count; i++)
             {
-                if (points[i] == 3) Console.WriteLine("\n" + stakeholders[i].Name + " - Congratulations you WIN!");
+                if (Points[i] == 3) Console.WriteLine("\n" + stakeholders[i].Name + " - Congratulations you WIN!");
 
-                else if (points[i] == 2 && points[0] != 0) Console.WriteLine("\n" + stakeholders[i].Name + " - No one wins, it's a PUSH!");
+                else if (Points[i] == 2 && Points[0] != 0) Console.WriteLine("\n" + stakeholders[i].Name + " - No one wins, it's a PUSH!");
 
-                else if (points[i] == 1 && houseWin > 0) Console.WriteLine("\n" + stakeholders[i].Name + " - You LOST!");
+                else if (Points[i] == 1 && houseWin > 0) Console.WriteLine("\n" + stakeholders[i].Name + " - You LOST!");
             }
         }
 
         public bool Game { get => game; set => game = value; }
+        public List<int> Points { get => points; set => points = value; }
+        public DeckOfCards DealersDeck { get => dealersDeck; set => dealersDeck = value; }
     }
 }
 
