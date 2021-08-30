@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace testBlackJack
 {
     [TestClass]
-    public class TestSumCards
+    public class UnitTest1
     {
         sharpBlackJack.Game blackJack = new sharpBlackJack.Game();
         sharpBlackJack.Croupier deealer = new sharpBlackJack.Croupier();
