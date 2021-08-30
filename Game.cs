@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace sharpBlackJack
 {
-    class Game
+    public class Game
     {
         private bool newRound;
         private List<Player> stakeholders = new List<Player>();

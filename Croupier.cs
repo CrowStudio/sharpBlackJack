@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace sharpBlackJack
 {
-    class Croupier
+    public class Croupier
     {
         private bool deal, game;
         // Initiate list with as many elements as the maximum Players + The Houos

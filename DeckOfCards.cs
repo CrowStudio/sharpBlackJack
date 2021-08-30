@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace sharpBlackJack
 {
-    class DeckOfCards
+    public class DeckOfCards
     {
         private List<string> shuffledDeck = new List<string>();
         private string suites = "♠♥♦♣";

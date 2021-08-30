@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace sharpBlackJack
 {
-    class Player
+    public class Player
     {
         private string name;
         private HandOfCards myHand;
